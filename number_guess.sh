@@ -43,7 +43,7 @@ do
     echo "It's higher than that, guess again:"
   fi
   read GUESS
-  
+
 done
 
 NEW_GAMES_PLAYED=$(( GAMES_PLAYED + 1 ))
