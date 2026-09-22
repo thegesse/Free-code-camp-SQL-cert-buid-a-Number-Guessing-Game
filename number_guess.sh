@@ -42,3 +42,10 @@ do
   read GUESS
 done
 
+NEW_GAMES_PLAYED=$(( GAMES_PLAYED + 1 ))
+if [[ -z $BEST_GAME || $NUMBER_OF_GUESSES -lt $BEST_GAME ]]; then
+  UPDATE_RESULT=$($PSQL "UPDATE users SET games_played=$NEW_GAMES+PLAYED, best_game=$NUMBER_OF_GUESSES WHERE user_id=$USER_ID;")
+else
+  UPDATE_RESULT=$($PSQL "UPDATE users SET games_played=$NEW_GAMES_PLAYED, WHERE user_id=$USER_ID;")
+
+echo "You guessed it in $NUMBER_OF_GUESSES tries. The secret number was $SECRET_num. Nice job!"
