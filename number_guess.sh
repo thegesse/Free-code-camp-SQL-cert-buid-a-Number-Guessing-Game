@@ -31,7 +31,7 @@ while true
 do
   ((NUMBER_OF_GUESSES++))
   if [[ ! $GUESS =~ ^[0-9]+$ ]]; then
-    echo "That is not a integer, guess again:"
+    echo "That is not an integer, guess again:"
   elif  [[ $GUESS -eq $SECRET_NUM ]]; then
     break
   elif [[ $GUESS -gt $SECRET_NUM ]]; then
@@ -44,8 +44,8 @@ done
 
 NEW_GAMES_PLAYED=$(( GAMES_PLAYED + 1 ))
 if [[ -z $BEST_GAME || $NUMBER_OF_GUESSES -lt $BEST_GAME ]]; then
-  UPDATE_RESULT=$($PSQL "UPDATE users SET games_played=$NEW_GAMES+PLAYED, best_game=$NUMBER_OF_GUESSES WHERE user_id=$USER_ID;")
+  UPDATE_RESULT=$($PSQL "UPDATE users SET games_played=$NEW_GAMES_PLAYED, best_game=$NUMBER_OF_GUESSES WHERE user_id=$USER_ID;")
 else
-  UPDATE_RESULT=$($PSQL "UPDATE users SET games_played=$NEW_GAMES_PLAYED, WHERE user_id=$USER_ID;")
-
-echo "You guessed it in $NUMBER_OF_GUESSES tries. The secret number was $SECRET_num. Nice job!"
+  UPDATE_RESULT=$($PSQL "UPDATE users SET games_played=$NEW_GAMES_PLAYED WHERE user_id=$USER_ID;")
+fi
+echo "You guessed it in $NUMBER_OF_GUESSES tries. The secret number was $SECRET_NUM. Nice job!"
